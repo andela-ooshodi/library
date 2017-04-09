@@ -1,0 +1,38 @@
+{% extends "bookshelf/base.html" %}
+
+{% block body_content %}
+<div class="">
+    <h1>Search Result</h1>
+    {# Search Result for Category #}
+    {% if categories %}
+        <h3> Categories matching query: </h3>
+        <h6><em>Found {{ categories|length }} result{% if categories|length > 1 %}s{% endif %}</em></h6>
+        <ol>
+            {% for category in categories %}
+                <li>
+                    <h5>Category: <strong>{{ category.name }}</strong></h5>
+                    <h5>Description: <em>{{ category.description }}</em></h5>
+                    <h5>Number of books: {{ category.book.all|length }}</h5>
+                </li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+    {# Search Result for Books #}
+    {% if books %}
+        <h3> Books matching query: </h3>
+         <h6><em> Found {{ books|length }} result{% if books|length > 1 %}s{% endif %}</em></h6>
+        <ol>
+        {% for book in books %}
+            <li>
+                <h5>Book Title: <strong>{{ book.name }}</strong></h5>
+                <h5>Book Description: <em>{{ book.description }}</em></h5>
+                <h5>Book Author: {{book.author}}</h5>
+                <h5>Book Category: {{ book.category.name }}</h5>
+            </li>
+        {% endfor %}
+        </ol>
+        {% endif %}
+    <p>Click <a href="{% url 'home' %}">here</a> to search again</p>
+</div>
+
+{% endblock body_content %}
