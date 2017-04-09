@@ -7,6 +7,7 @@ dependencies:
   pre:
     - pip install --upgrade pip
     - pip install --upgrade virtualenv
+    - pip install coveralls
 test:
   override:
     - python library/manage.py test --with-coverage
