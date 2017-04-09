@@ -3,7 +3,7 @@ from django.test import TestCase
 from bookshelf.models import Category, Book
 
 
-class BookAppModelsTest(TestCase):
+class BookShelfModelsTest(TestCase):
 
     def setUp(self):
         self.category = Category.objects.create(
@@ -19,7 +19,7 @@ class BookAppModelsTest(TestCase):
 
     def tearDown(self):
         Category.objects.all().delete()
-        Book.objects.all().delete()
+        # Book.objects.all().delete()
 
     def test_get_category_from_db(self):
         category = Category.objects.get(name='Space')
