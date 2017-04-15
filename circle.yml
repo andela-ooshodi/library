@@ -19,8 +19,17 @@ deployment:
     heroku:
       appname: library-lite
       commands:
-        - git fetch origin --unshallow
-        - git push -f git@heroku.com:library-lite.git $CIRCLE_SHA1:refs/heads/master
-        - heroku run python manage.py collectstatic --noinput
-        - heroku run python manage.py migrate --app library-lite
-        - heroku ps:scale web=1 --app library-lite
+        - |
+          cat >~/.netrc <<EOF
+          machine api.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_TOKEN
+          machine git.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_TOKEN
+          EOF
+        - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
+        - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+        - git push git@heroku.com:library-lite.git $CIRCLE_SHA1:refs/heads/master
+        - heroku run python manage.py migrate --app library-lite:
+            timeout: 400 # if your deploys take a long time
