@@ -26,4 +26,4 @@ class Category(Base):
 
 class Book(Base):
     author = models.CharField(max_length=50, default='Unknown')
-    category = models.ForeignKey(Category, related_name='book')
+    category = models.ForeignKey(Category, related_name='books')

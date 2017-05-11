@@ -22,5 +22,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(bookshelf.urls)),
-    url(r'^libraryapi/', include(libraryapi.urls)),
+    url(r'^libraryapi/', include(libraryapi.urls))
 ]
