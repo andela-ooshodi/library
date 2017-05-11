@@ -12,7 +12,7 @@
                 <li>
                     <h5>Category: <strong>{{ category.name }}</strong></h5>
                     <h5>Description: <em>{{ category.description }}</em></h5>
-                    <h5>Number of books: {{ category.book.all|length }}</h5>
+                    <h5>Number of books: {{ category.books.all|length }}</h5>
                 </li>
             {% endfor %}
         </ol>
